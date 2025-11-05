@@ -8,24 +8,7 @@ class CalculatorPage:
         self.driver = driver
         self.delay_input = (By.CSS_SELECTOR, "#delay")
         self.result_display = (By.CSS_SELECTOR, ".screen")
-        self.buttons = {
-            "1": (By.XPATH, "//span[text()='1']"),
-            "2": (By.XPATH, "//span[text()='2']"),
-            "3": (By.XPATH, "//span[text()='3']"),
-            "4": (By.XPATH, "//span[text()='4']"),
-            "5": (By.XPATH, "//span[text()='5']"),
-            "6": (By.XPATH, "//span[text()='6']"),
-            "7": (By.XPATH, "//span[text()='7']"),
-            "8": (By.XPATH, "//span[text()='8']"),
-            "9": (By.XPATH, "//span[text()='9']"),
-            "0": (By.XPATH, "//span[text()='0']"),
-            "+": (By.XPATH, "//span[text()='+']"),
-            "-": (By.XPATH, "//span[text()='-']"),
-            "*": (By.XPATH, "//span[text()='×']"),
-            "/": (By.XPATH, "//span[text()='÷']"),
-            "=": (By.XPATH, "//span[text()='=']"),
-            "C": (By.XPATH, "//span[text()='C']")
-        }
+        self.button = "//span[text()='{}']"  # Универсальный локатор для всех кнопок
 
     def open(self):
         self.driver.get("https://bonigarcia.dev/selenium-webdriver-java/slow-calculator.html")
@@ -36,8 +19,8 @@ class CalculatorPage:
         delay_field.send_keys(str(delay_value))
 
     def click_button(self, button):
-        button_element = self.driver.find_element(*self.buttons[button])
-        button_element.click()
+        # button из теста передается как "7", "+", "8", "=" и т.д.
+        self.driver.find_element(By.XPATH, self.button.format(button)).click()
 
     def wait_for_result(self, expected_result, timeout=50):
         wait = WebDriverWait(self.driver, timeout)

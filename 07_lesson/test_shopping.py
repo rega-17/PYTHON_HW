@@ -6,7 +6,7 @@ from checkout_page import CheckoutPage
 
 
 def test_shopping_flow():
-    driver = webdriver.Chrome()  # Можно заменить на webdriver.Firefox() или webdriver.Edge()
+    driver = webdriver.Chrome()
 
     try:
         # Создаем объекты страниц
@@ -39,8 +39,6 @@ def test_shopping_flow():
         # Шаг 5: Проверить итоговую стоимость
         total_amount = checkout_page.get_total_amount()
         assert total_amount == "58.29", f"Ожидалась сумма 58.29, но получена {total_amount}"
-
-        print("Тест пройден успешно! Итоговая сумма: $58.29")
 
     finally:
         driver.quit()
