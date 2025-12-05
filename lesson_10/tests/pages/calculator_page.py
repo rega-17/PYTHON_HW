@@ -1,27 +1,30 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+import allure
 
 class CalculatorPage:
     def __init__(self, driver):
         self.driver = driver
         self.delay_input = (By.CSS_SELECTOR, "#delay")
         self.result_display = (By.CSS_SELECTOR, ".screen")
-        self.button = "//span[text()='{}']"  # Универсальный локатор для всех кнопок
+        self.button = "//span[text()='{}']"
 
+    @allure.step("Открыть страницу калькулятора")
     def open(self):
         self.driver.get("https://bonigarcia.dev/selenium-webdriver-java/slow-calculator.html")
 
+    @allure.step("Установить задержку в {delay_value} секунд")
     def set_delay(self, delay_value):
         delay_field = self.driver.find_element(*self.delay_input)
         delay_field.clear()
         delay_field.send_keys(str(delay_value))
 
+    @allure.step("Нажать кнопку '{button}'")
     def click_button(self, button):
-        # button из теста передается как "7", "+", "8", "=" и т.д.
         self.driver.find_element(By.XPATH, self.button.format(button)).click()
 
+    @allure.step("Дождаться результата '{expected_result}'")
     def wait_for_result(self, expected_result, timeout=50):
         wait = WebDriverWait(self.driver, timeout)
         wait.until(
