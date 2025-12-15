@@ -1,0 +1,30 @@
+
+# Отчёты
+reports/allure-results/
+reports/allure-report/
+reports/*.html
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+.env
+.venv/
+venv/
+
+# PyCharm
+.idea/
+*.iml
+
+# Операционные системы
+.DS_Store
+Thumbs.db
+
+# Логи
+*.log
+*.tmp
+# Allure
+.allure/
+allure-results/
+allure-report/
+*.allure
